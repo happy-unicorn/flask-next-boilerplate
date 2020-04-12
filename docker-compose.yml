@@ -1,0 +1,43 @@
+version: "3"
+
+services:
+  server:
+    container_name: flask
+    build:
+      context: ./server
+      dockerfile: ./../config/docker/server/Dockerfile
+    command: python server.py runserver --host 0.0.0.0 --port 5000
+    ports:
+      - "127.0.0.1:5000:5000"
+    volumes:
+      - ./server:/code
+    env_file:
+      - ./config/env/flask/.env
+      - ./config/env/postgres/.env
+    depends_on:
+      - db
+  db:
+    container_name: postgresql
+    image: postgres:12.2
+    ports:
+      - "127.0.0.1:5432:5432"
+    volumes:
+      - /home/happy-unicorn/Projects/backend-flask-db:/var/lib/postgresql/data
+    env_file:
+      - ./config/env/postgres/.env
+  client:
+    container_name: nextjs
+    build:
+      context: ./client
+      dockerfile: ./../config/docker/client/Dockerfile
+    command: npm run dev
+    ports:
+      - "127.0.0.1:3000:3000"
+    volumes:
+      - ./client:/code
+      - /code/node_modules
+      - /code/.next
+    env_file:
+      - ./config/env/nextjs/.env
+    depends_on:
+      - server
