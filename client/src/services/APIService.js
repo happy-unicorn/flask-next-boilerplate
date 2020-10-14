@@ -49,6 +49,7 @@ class APIService {
     }
 
     responseErrorMiddleware(error) {
+        console.log(error);
         // if(true) {//isTokenExpired
         //     return this.tryRefreshTokens(error);
         // }

@@ -15,4 +15,4 @@ class SessionModel(db.Model):
         db.DateTime(),
         default=lambda: datetime.datetime.utcnow() + datetime.timedelta(seconds=int(os.environ.get('REFRESH_TOKEN_EXPIRES')))
     )
-    user_id = db.Column(db.String(36), db.ForeignKey('user.id', ondelete="CASCADE"))
+    user_id = db.Column(db.String(36), db.ForeignKey('user.id', ondelete='CASCADE'))

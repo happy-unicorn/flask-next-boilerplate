@@ -4,7 +4,7 @@ import { Provider } from 'react-redux';
 const StoreProvider = (props) => {
     return (
         <Provider store={props.store}>
-                {props.children}
+            {props.children}
         </Provider>
     );
 };

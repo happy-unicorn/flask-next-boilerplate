@@ -13,6 +13,7 @@ class UserModel(db.Model):
     password_hash = db.Column(db.String(72), nullable=False)
     created_on = db.Column(db.DateTime(), default=datetime.utcnow)
     sessions = db.relationship('SessionModel', backref='user', lazy='dynamic')
+    products = db.relationship('ProductModel', backref='user', lazy='dynamic')
 
     @property
     def password(self):

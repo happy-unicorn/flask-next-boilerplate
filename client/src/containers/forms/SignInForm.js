@@ -6,7 +6,6 @@ import RoutingService from '../../services/RoutingService';
 import compose from '../../utils/compose';
 import InputField from '../../components/fields/InputField';
 import SubmitButton from '../../components/buttons/SuperButton';
-import Logo from '../../components/Logo';
 import { signIn } from '../../state/reducers/user';
 import signInSchema from './schemas/signInSchema';
 
@@ -45,7 +44,6 @@ class SignInForm extends Component {
             >
                 {props => (
                     <Form onSubmit={props.handleSubmit} noValidate>
-                        <Logo/>
                         <InputField type={'email'} name={'email'} placeholder={'Email'}/>
                         <InputField type={'password'} name={'password'} placeholder={'Password'}/>
                         <SubmitButton

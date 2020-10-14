@@ -3,11 +3,11 @@ import { connect } from 'react-redux';
 import { Formik } from 'formik';
 import styled from 'styled-components';
 import RoutingService from '../../services/RoutingService';
-import { signUp } from '../../state/reducers/user';
 import compose from '../../utils/compose';
 import InputField from '../../components/fields/InputField';
 import SubmitButton from '../../components/buttons/SuperButton';
-import signUpSchema from './schemas/signUpSchema';
+import { signIn } from '../../state/reducers/user';
+import addProductSchema from './schemas/addProductSchema';
 
 const Form = styled.form`
   display: flex;
@@ -34,24 +34,23 @@ const Form = styled.form`
   }
 `;
 
-class SignUpForm extends Component {
+class AddProductForm extends Component {
     render() {
         return(
             <Formik
-                initialValues={{ email: '', username: '', password: '' }}
-                validationSchema={signUpSchema}
+                initialValues={{ title: '', description: '' }}
+                validationSchema={addProductSchema}
                 onSubmit={this.props.onSubmit}
             >
                 {props => (
                     <Form onSubmit={props.handleSubmit} noValidate>
-                        <InputField type={'email'} name={'email'} placeholder={'Email'}/>
-                        <InputField type={'text'} name={'username'} placeholder={'Username'}/>
-                        <InputField type={'password'} name={'password'} placeholder={'Password'}/>
+                        <InputField type={'text'} name={'title'} placeholder={'Title'}/>
+                        <InputField type={'text'} name={'description'} placeholder={'Description'}/>
                         <SubmitButton
                             type={'submit'}
-                            label={'Sign Up'}
-                            isProgressed={this.props.isSignUping}
-                            isDisabled={this.props.isSignUping}
+                            label={'Add product'}
+                            isProgressed={this.props.isSignIning}
+                            isDisabled={this.props.isSignIning}
                         />
                     </Form>
                 )}
@@ -61,7 +60,7 @@ class SignUpForm extends Component {
 }
 
 const mapStateToProps = state => ({
-    isSignUping: state.user.isSignUping
+    isSignIning: state.user.isSignIning
 });
 
 const mapDispatchToProps = dispatch => ({
@@ -71,10 +70,10 @@ const mapDispatchToProps = dispatch => ({
                 RoutingService.redirectTo('/home');
             }
         };
-        dispatch(signUp(values, actions, callbacks));
+        dispatch(signIn(values, actions, callbacks));
     }
 });
 
 export default compose(
     connect(mapStateToProps, mapDispatchToProps)
-)(SignUpForm);
+)(AddProductForm);

@@ -4,6 +4,7 @@ import createSagaMiddleware from 'redux-saga';
 import { all } from 'redux-saga/effects';
 import appReducer from './reducers/app';
 import userReducer from './reducers/user';
+import productReducer from './reducers/product';
 import userSaga from './sagas/user';
 import userMiddleware from "./middlewares/user";
 
@@ -11,7 +12,8 @@ const { publicRuntimeConfig } = getConfig();
 
 const rootReducer = combineReducers({
     app: appReducer,
-    user: userReducer
+    user: userReducer,
+    product: productReducer
 });
 
 function* rootSaga() {

@@ -19,7 +19,6 @@ class TokenService {
             const { accessToken, expiryDate } = getNextCookie(ctx);
             return { accessToken, expiryDate };
         } else {
-
             return {
                 accessToken: Cookie.get('accessToken'),
                 expiryDate: Cookie.get('expiryDate')
